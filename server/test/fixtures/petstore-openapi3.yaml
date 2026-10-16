@@ -1,0 +1,45 @@
+openapi: 3.0.3
+info: { title: Petstore Mock, version: 1.2.0 }
+servers: [{ url: "http://localhost:9099/api/v3" }]
+paths:
+  /pet/{petId}:
+    get:
+      operationId: getPetById
+      summary: Busca um pet pelo ID
+      parameters:
+        - { name: petId, in: path, required: true, description: ID do pet, schema: { type: integer } }
+      responses: { "200": { description: Pet encontrado, content: { application/json: { schema: { $ref: "#/components/schemas/Pet" } } } } }
+    delete:
+      operationId: deletePet
+      summary: Remove um pet
+      parameters:
+        - { name: petId, in: path, required: true, schema: { type: integer } }
+        - { name: api_key, in: header, schema: { type: string } }
+      responses: { "200": { description: ok } }
+  /pet/findByStatus:
+    get:
+      operationId: findPetsByStatus
+      summary: Lista pets por status
+      parameters:
+        - { name: status, in: query, required: false, schema: { type: string, enum: [available, pending, sold] } }
+      responses: { "200": { description: lista } }
+  /pet:
+    post:
+      operationId: addPet
+      summary: Cria um novo pet na loja
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/Pet" } } }
+      responses: { "200": { description: criado } }
+components:
+  schemas:
+    Category: { type: object, properties: { id: { type: integer }, name: { type: string } } }
+    Pet:
+      type: object
+      required: [name]
+      properties:
+        id: { type: integer, example: 10 }
+        name: { type: string, example: doggie }
+        category: { $ref: "#/components/schemas/Category" }
+        parent: { $ref: "#/components/schemas/Pet" }
+        status: { type: string, enum: [available, pending, sold], nullable: true }

@@ -1,0 +1,4 @@
+{"swagger":"2.0","info":{"title":"Legacy","version":"0.1"},"host":"localhost:9099","basePath":"/legacy","schemes":["http"],
+ "paths":{"/users/{id}":{"parameters":[{"name":"id","in":"path","required":true,"type":"string"}],
+   "get":{"summary":"Get user","responses":{"200":{"description":"ok"}}},
+   "put":{"operationId":"updateUser","parameters":[{"name":"body","in":"body","schema":{"type":"object","properties":{"name":{"type":"string"}}}}],"responses":{"200":{"description":"ok"}}}}}}

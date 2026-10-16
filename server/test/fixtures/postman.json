@@ -1,0 +1,9 @@
+{"info":{"name":"ERP Demo","schema":"https://schema.getpostman.com/json/collection/v2.1.0/collection.json"},
+ "variable":[{"key":"baseUrl","value":"http://localhost:9099/erp"}],
+ "item":[{"name":"Clientes","item":[
+   {"name":"Buscar cliente por CPF","request":{"method":"GET","header":[{"key":"Authorization","value":"Bearer {{token}}"}],
+     "url":{"raw":"{{baseUrl}}/clientes/:cpf?ativo=true","host":["{{baseUrl}}"],"path":["clientes",":cpf"],
+       "query":[{"key":"ativo","value":"true","description":"Somente ativos"}],"variable":[{"key":"cpf","description":"CPF sem pontuação"}]},
+     "description":"Retorna os dados cadastrais do cliente."}},
+   {"name":"Criar chamado","request":{"method":"POST","url":"{{baseUrl}}/chamados","body":{"mode":"raw","raw":"{\"cpf\":\"123\",\"assunto\":\"Sem internet\",\"prioridade\":1}"}}}
+ ]}]}

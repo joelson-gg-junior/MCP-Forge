@@ -1,0 +1,18 @@
+services:
+  mcp-forge:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      # Endereço que o Cherry Studio usa para chegar no servidor
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:8080}
+    # Login do Nexus (NEXUS_EMAIL / NEXUS_PASSWORD) — veja server/.env.example
+    env_file:
+      - path: server/.env
+        required: false
+    volumes:
+      - mcp-forge-data:/data
+    restart: unless-stopped
+
+volumes:
+  mcp-forge-data:
